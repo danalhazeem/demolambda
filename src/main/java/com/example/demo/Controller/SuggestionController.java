@@ -32,4 +32,23 @@ public class SuggestionController {
         return ResponseEntity.ok(suggestions);
     }
 
+    @GetMapping("/create")
+    public ResponseEntity<List<GuestSuggestionEntity>> getCreatedSuggestions(){
+        List<GuestSuggestionEntity> suggestions= guestSuggestionService.findAllCreatedSuggestions();
+        return ResponseEntity.ok(suggestions);
+    }
+
+    @GetMapping("/remove")
+    public ResponseEntity<List<GuestSuggestionEntity>> getRemoveSuggestions(){
+        List<GuestSuggestionEntity> suggestions= guestSuggestionService.findAllRemovedSuggestions();
+        return ResponseEntity.ok(suggestions);
+    }
+
+
+    @GetMapping("/duplicate")
+    public ResponseEntity<List<GuestSuggestionEntity>> getUniqueSuggestions(){
+        List<GuestSuggestionEntity> suggestions= guestSuggestionService.findAllSuggestions();
+        return ResponseEntity.ok(suggestions);
+    }
+
 }

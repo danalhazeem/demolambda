@@ -5,17 +5,32 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "guest_suggestions")
 public class GuestSuggestionEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "rate", nullable = false)
-    private String rate;
+    @Column(nullable = false)
+    private int rate;
 
-    @Column(name = "suggestionText", nullable = false)
+    @Column(nullable = false, length = 500)
     private String suggestionText;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SuggestionStatus status;
+
+    // Default constructor (needed for JPA)
+    public GuestSuggestionEntity() {}
+
+    // Constructor with parameters
+    public GuestSuggestionEntity(int rate, String suggestionText, SuggestionStatus status) {
+        this.rate = rate;
+        this.suggestionText = suggestionText;
+        this.status = status;
+    }
+
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -24,11 +39,11 @@ public class GuestSuggestionEntity {
         this.id = id;
     }
 
-    public String getRate() {
+    public int getRate() {
         return rate;
     }
 
-    public void setRate(String rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
@@ -38,5 +53,13 @@ public class GuestSuggestionEntity {
 
     public void setSuggestionText(String suggestionText) {
         this.suggestionText = suggestionText;
+    }
+
+    public SuggestionStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(SuggestionStatus status) {
+        this.status = status;
     }
 }
